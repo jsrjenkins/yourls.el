@@ -69,7 +69,7 @@
     (user-error "`yourls-api-endpoint' is not defined."))
   (unless yourls-api-signature
     (user-error "`yourls-api-signature' is not defined."))
-  (unless title (setq title ""))
+  (unless keyword (setq title ""))
   (let* ((querys (url-build-query-string `(("signature" ,yourls-signature)
                                            ("action" "shorturl")
                                            ("format" "json")
