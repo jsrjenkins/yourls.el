@@ -86,11 +86,6 @@
         shortened)))) 
 
 ;;;###autoload
-(defun yourls-make-custom (url)
-  (interactive "sTitle:")
-  (yourls-make-short url s))
-
-;;;###autoload
 (defun yourls-get-short (url)
   "Retrieve the original of the shortened URL"
   (unless yourls-api-endpoint
@@ -110,6 +105,11 @@
                                             s)
                           (replace-regexp-in-string "\\\\" "" (match-string 1 s)))))
         shortened)))) 
+
+;;;###autoload
+(defun yourls-make-custom (url)
+  (interactive "sTitle:")
+  (yourls-make-short url s))
 
 (provide 'yourls)
 
