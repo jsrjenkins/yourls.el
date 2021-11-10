@@ -63,6 +63,7 @@
       (delete-region beg end)
       (insert url))))
 
+;;;###autoload
 (defun yourls-make-short (url)
   (unless yourls-api-endpoint
     (user-error "`yourls-api-endpoint' is not defined."))
@@ -82,6 +83,7 @@
                           (replace-regexp-in-string "\\\\" "" (match-string 1 s)))))
         shortened))))
 
+;;;###autoload
 (defun yourls-make-custom (url)
   (interactive "tTitle:")
   (unless yourls-api-endpoint
