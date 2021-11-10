@@ -9,19 +9,18 @@ It provides two commands to shorten, *yourls-at-point* and
 *yourls-region*. The first function will scan the point and pull the
 url to shorten. The other will do the same for a selected region.
 
-There is also contains a command to expand the shortened url at point
+There is also a command to expand the shortened url at point
 *yourls-get-point*.  This command will just look into the database and
 retreive the long url for the shortened url you have at the point.
 
 You can also make a custom url with the function *yourls-make-custom*
-that will ask what keyword to use. Otherwise it will just assign the
-next free location in its database.
+that will ask what keyword to use in making the shortened url.
 
-To used it you have to define two variables, _yourls-api-endpoint_ and
-_yourls-api-signature_.  Your can learn about them at
+To used it you have to define two variables, *yourls-api-endpoint* and
+*yourls-api-signature*.  Your can learn about them at
 http://yourls.org/#API.
 
-You can find your api-signature (usually 10
+You can find your *api-signature* (usually 10
 random letters and numbers) at your installation.  (substitute <your
 installation> with the domain where you installed it).
 
@@ -33,7 +32,7 @@ You can install this extension using [[https://github.com/dimitri/el-get][el-get
 
 #+BEGIN_SRC elisp
 (el-get-bundle yourls
-   :url "https://github.com/jsrjenkins/yourls-el.git"
+   :url "https://github.com/jsrjenkins/yourls.el.git"
    :features yourls)
 (setq yourls-api-endpoint "http://<the location of yourls>/yourls-api.php")
 (setq yourls-api-signature "<your private signature>")
