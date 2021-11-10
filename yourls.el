@@ -46,7 +46,7 @@
     (interactive)
     (let ((url-bounds (bounds-of-thing-at-point 'url)))
       (when url-bounds
-        (let ((url (yourls-get-short (thing-at-point 'url))))
+        (let ((url (yourls-make-short (thing-at-point 'url))))
           (when url
             (save-restriction
               (narrow-to-region (car url-bounds) (cdr url-bounds))
@@ -58,7 +58,7 @@
   (interactive "P")
   (let* ((beg (region-beginning))
          (end (region-end))
-         (url (yourls-get-short (buffer-substring-no-properties beg end))))
+         (url (yourls-make-short (buffer-substring-no-properties beg end))))
     (when url
       (delete-region beg end)
       (insert url))))
