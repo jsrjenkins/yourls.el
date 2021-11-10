@@ -69,13 +69,13 @@
     (user-error "`yourls-api-endpoint' is not defined."))
   (unless yourls-api-signature
     (user-error "`yourls-api-signature' is not defined."))
-  (unless keyword (setq title ""))
-  (let* ((querys (url-build-query-string `(("signature" ,yourls-signature)
+  (unless keyword (setq keyword ""))
+  (let* ((querys (url-build-query-string `(("signature" ,yourls-api-signature)
                                            ("action" "shorturl")
                                            ("format" "json")
 					   ("keyword" ,keyword)
                                            ("url" ,url))))
-         (final-url (concat yourls-url "/?" querys))
+         (final-url (concat yourls-api-endpoint "/?" querys))
          (url-request-method "GET")
          (retrieved (url-retrieve-synchronously final-url)))
     (with-current-buffer retrieved
@@ -90,19 +90,18 @@
   (interactive "sTitle:")
   (yourls-make-short url s))
 
-;; TODO : retrieve the original url from the shortened one 
-
+;;;###autoload
 (defun yourls-get-short (url)
   "Retrieve the original of the shortened URL"
   (unless yourls-api-endpoint
     (user-error "`yourls-api-endpoint' is not defined."))
   (unless yourls-api-signature
     (user-error "`yourls-api-signature' is not defined."))
-  (let* ((querys (url-build-query-string `(("signature" ,yourls-signature)
+  (let* ((querys (url-build-query-string `(("signature" ,yourls-api-signature)
                                            ("action" "expand")
                                            ("format" "json")
                                            ("shorturl" ,url))))
-         (final-url (concat yourls-url "/?" querys))
+         (final-url (concat yourls-api-endpoint "/?" querys))
          (url-request-method "GET")
          (retrieved (url-retrieve-synchronously final-url)))
     (with-current-buffer retrieved
