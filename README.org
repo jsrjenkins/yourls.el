@@ -1,11 +1,8 @@
 #+Title: yourls.el --- URL Shortener with Yourls
 
-This library implements convenient functions to shorten an url with
-[[http://yourls.org/#API][Yourls API]], [[http://yourls.org/][Your Own URL Shortener]].
+This library implements convenient functions to shorten an url with [[http://yourls.org/#API][Yourls API]], [[http://yourls.org/][Your Own URL Shortener]].
 
-It provides two commands to shorten, `yourls-at-point' and
-`yourls-region'.
+It provides two commands to shorten, `yourls-at-point' and `yourls-region'. It also contains a command to expand the shortened url at point `yourls-get-point'. You can also make a custom url with the function `yourls-make-custom'.
 
 To used it you have to define two variables, `yourls-api-endpoint' and
-`yourls-api-signature'.  Your can learn them at
-http://yourls.org/#API.
+`yourls-api-signature'.  Your can learn them at http://yourls.org/#API.
