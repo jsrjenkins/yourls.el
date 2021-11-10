@@ -6,3 +6,5 @@ It provides two commands to shorten, `yourls-at-point' and `yourls-region'. It a
 
 To used it you have to define two variables, `yourls-api-endpoint' and
 `yourls-api-signature'.  Your can learn them at http://yourls.org/#API.
+
+This is heavily modified from the original extension by Yasushi SHOJI, which is no longer working and apparently no longer maitained. For this reason we publish here this entirely new version.

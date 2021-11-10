@@ -1,13 +1,12 @@
 ;;; yourls.el --- URL Shortener with Yourls
 
 ;; This is heavily modified from the original extension by Yasushi SHOJI,
-;; which no longer is maintained and no longer works
-;; to such an extent we publish under our own name.
+;; which no longer is maintained and no longer works. It is so heavily modified that we have removed the fork and publish under our own name.
 
 ;; Copyright (C) 2021  John Jenkisn
 
 ;; Author: Fr. John Jenkins <jenkins@sspx.org.za>
-;; URL: https://github.com/jsrjenkins/yourls-el
+;; URL: https://github.com/jsrjenkins/yourls.el
 ;; Keywords: convenience url-shortener
 
 ;; YOURLS can be found here: https://github.com/YOURLS/YOURLS/releases
