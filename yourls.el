@@ -54,6 +54,19 @@
               (insert url)))))))
 
 ;;;###autoload
+(defun yourls-get-at-point ()
+  "expand the shortened url at point"
+    (interactive)
+    (let ((url-bounds (bounds-of-thing-at-point 'url)))
+      (when url-bounds
+        (let ((url (yourls-get-short (thing-at-point 'url))))
+          (when url
+            (save-restriction
+              (narrow-to-region (car url-bounds) (cdr url-bounds))
+              (delete-region (point-min) (point-max))
+              (insert url)))))))
+
+;;;###autoload
 (defun yourls-region (arg)
   (interactive "P")
   (let* ((beg (region-beginning))
