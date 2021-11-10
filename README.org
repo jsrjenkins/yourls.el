@@ -1,10 +1,49 @@
-#+Title: yourls.el --- URL Shortener with Yourls
+#+Title: URL Shortener with Yourls for Emacs
 
-This library implements convenient functions to shorten an url with [[http://yourls.org/#API][Yourls API]], [[http://yourls.org/][Your Own URL Shortener]].
+* A package for Emacs
 
-It provides two commands to shorten, `yourls-at-point' and `yourls-region'. It also contains a command to expand the shortened url at point `yourls-get-point'. You can also make a custom url with the function `yourls-make-custom'.
+This EMACS library implements convenient functions to shorten an url
+with [[http://yourls.org/#API][Yourls API]], [[http://yourls.org/][Your Own URL Shortener]].
 
-To used it you have to define two variables, `yourls-api-endpoint' and
-`yourls-api-signature'.  Your can learn them at http://yourls.org/#API.
+It provides two commands to shorten, *yourls-at-point* and
+*yourls-region*. The first function will scan the point and pull the
+url to shorten. The other will do the same for a selected region.
 
-This is heavily modified from the original extension by Yasushi SHOJI, which is no longer working and apparently no longer maitained. For this reason we publish here this entirely new version.
+There is also contains a command to expand the shortened url at point
+*yourls-get-point*.  This command will just look into the database and
+retreive the long url for the shortened url you have at the point.
+
+You can also make a custom url with the function *yourls-make-custom*
+that will ask what keyword to use. Otherwise it will just assign the
+next free location in its database.
+
+To used it you have to define two variables, _yourls-api-endpoint_ and
+_yourls-api-signature_.  Your can learn about them at
+http://yourls.org/#API.
+
+You can find your api-signature (usually 10
+random letters and numbers) at your installation.  (substitute <your
+installation> with the domain where you installed it).
+
+http://<your installation>/admin/tools.php
+
+* Installation: Install with el-get.
+
+You can install this extension using [[https://github.com/dimitri/el-get][el-get]] :
+
+#+BEGIN_SRC elisp
+(el-get-bundle yourls
+   :url "https://github.com/jsrjenkins/yourls-el.git"
+   :features yourls)
+(setq yourls-api-endpoint "http://<the location of yourls>/yourls-api.php")
+(setq yourls-api-signature "<your private signature>")
+#+END_SRC
+
+Similarly you can just add yourls.el to you emacs loading path.
+
+* Acknowledgements
+
+This is heavily modified from the original extension by [[https://github.com/yashi/yourls-el][Yasushi SHOJI]].
+His version is no longer working and apparently no longer maitained.
+For this reason we publish here this entirely new version which
+doesn't require any package other than the yourls.el file.
