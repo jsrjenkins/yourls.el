@@ -18,7 +18,7 @@
 ;; Yourls API, Your Own URL Shortener.
 ;;
 ;; It provides two commands to shorten, `yourls-at-point' and
-;; `yourls-region' as well as `yourls-get-short' and `yours-custom' which
+;; `yourls-region' as well as `yourls-make-short' and `yours-make-custom' which
 ;; allows for a custom shortcut
 ;;
 ;; To used it you have to define two variables, `yourls-api-endpoint'
@@ -64,14 +64,16 @@
       (insert url))))
 
 ;;;###autoload
-(defun yourls-make-short (url)
+(defun yourls-make-short (url &optional keyword)
   (unless yourls-api-endpoint
     (user-error "`yourls-api-endpoint' is not defined."))
   (unless yourls-api-signature
     (user-error "`yourls-api-signature' is not defined."))
+  (unless title (setq title ""))
   (let* ((querys (url-build-query-string `(("signature" ,yourls-signature)
                                            ("action" "shorturl")
                                            ("format" "json")
+					   ("keyword" ,keyword)
                                            ("url" ,url))))
          (final-url (concat yourls-url "/?" querys))
          (url-request-method "GET")
@@ -81,31 +83,34 @@
              (shortened (when (string-match "\"shorturl\":\"\\([^\"]*\\)\""
                                             s)
                           (replace-regexp-in-string "\\\\" "" (match-string 1 s)))))
-        shortened))))
+        shortened)))) 
 
 ;;;###autoload
 (defun yourls-make-custom (url)
-  (interactive "tTitle:")
+  (interactive "sTitle:")
+  (yourls-make-short url s))
+
+;; TODO : retrieve the original url from the shortened one 
+
+(defun yourls-get-short (url)
+  "Retrieve the original of the shortened URL"
   (unless yourls-api-endpoint
     (user-error "`yourls-api-endpoint' is not defined."))
   (unless yourls-api-signature
     (user-error "`yourls-api-signature' is not defined."))
   (let* ((querys (url-build-query-string `(("signature" ,yourls-signature)
-                                           ("action" "shorturl")
-					   ("keyword" ,t)
+                                           ("action" "expand")
                                            ("format" "json")
-                                           ("url" ,url))))
+                                           ("shorturl" ,url))))
          (final-url (concat yourls-url "/?" querys))
          (url-request-method "GET")
          (retrieved (url-retrieve-synchronously final-url)))
     (with-current-buffer retrieved
       (let* ((s (buffer-string))
-             (shortened (when (string-match "\"shorturl\":\"\\([^\"]*\\)\""
+             (shortened (when (string-match "\"longurl\":\"\\([^\"]*\\)\""
                                             s)
                           (replace-regexp-in-string "\\\\" "" (match-string 1 s)))))
-        shortened))))
-
-;; TODO : retrieve the original url from the shortened one 
+        shortened)))) 
 
 (provide 'yourls)
 
